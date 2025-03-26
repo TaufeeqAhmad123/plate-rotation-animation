@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:plate_rotation_animation/Home/home.dart';
 
 void main() {
@@ -12,11 +13,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'plate_rotation_animation',
       theme: ThemeData(
     
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xff45C37B),
+        ),
+        textTheme: GoogleFonts.poppinsTextTheme(),
+         useMaterial3: true,
       ),
+       
       home:  HomeScreen(),
     );
   }
