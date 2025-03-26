@@ -65,6 +65,7 @@ class _FoodWidgetState extends State<FoodWidget>
                     fontSize: 30,
                     fontWeight: FontWeight.w900,
                     color: Colors.black,
+                  
                   ),
                   controller: _controller,
                 

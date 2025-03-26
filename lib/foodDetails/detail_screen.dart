@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plate_rotation_animation/Model/food_model.dart';
 import 'package:plate_rotation_animation/components/animated_tile.dart';
-import 'package:plate_rotation_animation/utils/const.dart';
+import 'package:plate_rotation_animation/foodDetails/widget/tab_widget.dart';
 import 'package:unicons/unicons.dart';
 
 class FoodDetailScreen extends StatefulWidget {
@@ -50,7 +50,7 @@ class _FoodDetailScreenState extends State<FoodDetailScreen>
         ),
       ),
       body: Container(
-         padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -102,7 +102,13 @@ class _FoodDetailScreenState extends State<FoodDetailScreen>
                 ),
               ],
             ),
-            
+            Expanded(
+              child: TabWidget(
+                controller: _controller,
+                ingredients: widget.detail.ingredients ?? [],
+                textColor: widget.detail.textColor!,
+              ),
+            ),
           ],
         ),
       ),
