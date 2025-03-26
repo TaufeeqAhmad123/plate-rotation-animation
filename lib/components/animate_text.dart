@@ -18,6 +18,6 @@ class AnimateText extends StatelessWidget {
     return Text(data, style: style)
         .animate(controller: controller, autoPlay: autoPlay)
         .fade()
-        .scaleY(begin: -1, end: 0, duration: Duration(milliseconds: 300));
+        .scaleY(begin: 0, end:1, duration: Duration(milliseconds: 300));
   }
 }

@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           PageView.builder(
-            physics: NeverScrollableScrollPhysics(),
+            physics: BouncingScrollPhysics(),
             controller: _pageController,
             itemCount: foodList.length,
             scrollDirection: Axis.vertical,

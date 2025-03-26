@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:plate_rotation_animation/foodDetails/detail_screen.dart';
 import 'package:plate_rotation_animation/utils/const.dart';
 
 class RotationFoodAnimation extends StatefulWidget {
@@ -22,7 +23,7 @@ class _RotationFoodAnimationState extends State<RotationFoodAnimation>
   late AnimationController _controller;
   double? lastAnimatedValue;
   Curve animationType = Curves.easeOutBack;
-   int? textAnimationIndex;
+  int? textAnimationIndex;
   @override
   void initState() {
     super.initState();
@@ -37,44 +38,40 @@ class _RotationFoodAnimationState extends State<RotationFoodAnimation>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        navigateToFoodDetailScreen(foodList[widget.index], context);
+      },
       onVerticalDragUpdate: (details) async {
         if (details.delta.dy <= 0) {
-          if (_controller.isAnimating) {
-            if (widget.index < foodList.length - 1) {
-              setState(() {
-                animationType = Curves.easeOutBack;
-                textAnimationIndex = widget.index ;
-              });
-              Future.delayed(const Duration(milliseconds: 500), () {});
+          if (widget.index < foodList.length - 1) {
+            setState(() {
+              animationType = Curves.easeOutBack;
+              textAnimationIndex = widget.index;
+            });
+            Future.delayed(const Duration(milliseconds: 500), () {});
 
-              widget.pageController.nextPage(
-                duration: Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
-              );
-              _controller.loop(count: 1, max: 1);
-              lastAnimatedValue = 1;
-            }
+            widget.pageController.nextPage(
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeInOut,
+            );
+            _controller.loop(count: 1, max: 1);
+            lastAnimatedValue = 1;
           }
-        } else {
-          if (!_controller.isAnimating) {
-            if (widget.index > 0) {
-              setState(() {
-                animationType = Curves.easeOutBack;
-                textAnimationIndex = widget.index-1 ;
-              });
-              Future.delayed(const Duration(milliseconds: 500), () {});
+        } else if (details.delta.dy > 0) {
+          if (widget.index > 0) {
+            setState(() {
+              animationType = Curves.easeOutBack;
+              textAnimationIndex = widget.index - 1;
+            });
+            Future.delayed(const Duration(milliseconds: 500), () {});
 
-              widget.pageController.previousPage(
-                duration: const Duration(milliseconds: 1000),
-                curve: Curves.easeInOut,
-              );
-              if (widget.index > 0) {
-                lastAnimatedValue = 1;
-              }
-              _controller.reverse(from: lastAnimatedValue);
-              lastAnimatedValue = 0;
-            }
+            widget.pageController.previousPage(
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.easeInOut,
+            );
+
+            _controller.reverse(from: lastAnimatedValue);
+            lastAnimatedValue = 0;
           }
         }
       },
